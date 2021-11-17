@@ -1,5 +1,5 @@
-<div class="header"  >
-  <mat-toolbar color="primary" >
+<div class="header">
+  <mat-toolbar color="primary">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
@@ -14,43 +14,11 @@
   </mat-toolbar>
 </div>
 <div class="content">
- 
+
   <div class="main" role="main">
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc condimentum justo nunc, in tincidunt lectus lacinia
-    ut. Suspendisse pulvinar risus eget nulla porttitor, in congue est feugiat. Etiam non lorem dignissim, aliquam
-    mauris eu, mattis lorem. In finibus molestie magna id dignissim. Duis et leo ut odio sollicitudin ultricies nec in
-    enim. Morbi porta venenatis leo. Proin vitae nulla velit. Ut a suscipit elit. Integer faucibus, lacus venenatis
-    semper dapibus, odio lacus scelerisque arcu, quis maximus massa eros id ipsum. Nullam dapibus leo sem, a tincidunt
-    arcu blandit et.
-
-    Integer auctor ligula viverra sodales interdum. Quisque quam sapien, finibus eu aliquet vitae, aliquam ut justo.
-    Cras blandit est arcu, condimentum pharetra lectus vestibulum ut. Integer massa ipsum, volutpat nec ante et,
-    consequat malesuada nunc. Morbi pulvinar tortor ut arcu placerat aliquet. Nam varius libero dapibus mi faucibus
-    pharetra. Mauris at ultrices ligula, ut mattis dolor. Etiam lobortis tincidunt porta. In non imperdiet libero. Orci
-    varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce mollis commodo elit, vitae
-    accumsan urna lobortis ac.
-
-    Mauris ullamcorper auctor lorem, in suscipit orci viverra id. Proin nisi erat, consectetur a consequat lobortis,
-    iaculis ut metus. Integer pharetra nisi mauris, ut maximus leo dapibus eu. Etiam lacinia porttitor orci, quis
-    ullamcorper arcu eleifend et. Pellentesque ut arcu non odio vestibulum consectetur sit amet sit amet libero.
-    Pellentesque vitae sagittis lacus. Sed sed ipsum viverra, ullamcorper urna ut, cursus odio. Ut ut felis pulvinar,
-    commodo quam ac, luctus dui.
-
-    Maecenas augue tortor, scelerisque ut quam non, pharetra cursus est. Vivamus libero lacus, consequat eleifend magna
-    consectetur, blandit mattis magna. Quisque ac massa a leo mollis rhoncus et id arcu. Cras ut tristique odio. Etiam
-    eleifend, ante quis semper pretium, ligula enim mattis neque, eget egestas ligula ante at eros. In hac habitasse
-    platea dictumst. Suspendisse sem sapien, mollis sit amet tempor non, facilisis molestie justo. Curabitur feugiat
-    tempor odio et molestie. Vivamus pretium dui feugiat felis accumsan, at tristique justo cursus. Donec porttitor
-    vehicula aliquam. Vestibulum vulputate, velit nec elementum rhoncus, magna tortor mattis ligula, vel tincidunt diam
-    est in orci. Quisque vestibulum efficitur cursus. Pellentesque habitant morbi tristique senectus et netus et
-    malesuada fames ac turpis egestas. Nulla lacinia, orci quis ornare eleifend, diam urna iaculis mi, vel convallis
-    neque leo nec nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-
-    Nunc porttitor dapibus nisl, at sodales eros dignissim facilisis. Phasellus et elit sit amet sem malesuada molestie
-    quis nec leo. Donec aliquam lorem eget feugiat efficitur. Sed porta neque vitae blandit varius. Mauris vehicula in
-    lorem tristique rutrum. Nullam sagittis vel metus a sollicitudin. Phasellus luctus sem sed lacus consectetur
-    tincidunt.
+    <ag-grid-angular #agGrid class="ag-theme-alpine ag-grid-main" [rowData]="currentGameDeals"
+      [columnDefs]="columnDefs">
+    </ag-grid-angular>
   </div>
 </div>
 <div class="footer"></div>

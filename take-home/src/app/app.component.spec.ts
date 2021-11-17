@@ -1,3 +1,4 @@
+import { AgGridModule } from '@ag-grid-community/angular';
 import { GameDeal } from './models/deals';
 import { GameDealsFactory } from './testing/factories/game-deals';
 import { GameSearchService } from './services/game-search.service';
@@ -22,6 +23,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         MockModule(MatIconModule),
+        MockModule(AgGridModule),
         MatToolbarModule,
       ],
       providers: [{ provide: GameSearchService, useValue: gameSearchService }],
