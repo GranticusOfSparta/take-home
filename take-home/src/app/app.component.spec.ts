@@ -1,12 +1,17 @@
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-
+import { MockModule } from 'ng-mocks';
+import { By } from '@angular/platform-browser';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        MockModule(MatIconModule),
+        MatToolbarModule
       ],
       declarations: [
         AppComponent
@@ -29,7 +34,7 @@ describe('AppComponent', () => {
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('take-home app is running!');
+    fixture.debugElement.query(By.css('#app-title'));
+    expect(fixture.debugElement.query(By.css('#app-title')).nativeElement.innerHTML).toContain('Game It Up Bro');
   });
 });
