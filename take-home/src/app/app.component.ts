@@ -38,7 +38,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private watchmaxSalePrice() {
-    this.form.get("maxSalePrice")?.valueChanges.pipe(takeUntil(this.destroy$),
+    this.form.get("maxSalePrice")?.valueChanges.pipe(
+      takeUntil(this.destroy$),
       startWith(`${this.initialmaxSalePrice}`),
       debounceTime(100),
       tap((maxSalePrice: string) => this.getGameDeals(parseInt(maxSalePrice))))
