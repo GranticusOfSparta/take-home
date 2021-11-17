@@ -1,0 +1,39 @@
+@import "../styles.scss";
+
+$header-height: 5rem;
+$footer-height: 5rem;
+$main-content-height: calc(100vh - #{$header-height} - #{$footer-height});
+
+.header {
+  .mat-toolbar {
+    height: $header-height;
+    display: flex;
+    .spacer {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+.content {
+  background-image: url("../assets/MegaManBackground.jpg");
+  height: $main-content-height;
+
+  .main {
+    background: white;
+    width: 80em;
+    display: flex;
+    margin: auto;
+    height: 100%;
+    opacity: 80%;
+    overflow: auto;
+  }
+}
+
+.footer {
+  height: $footer-height;
+  display: flex;
+  background-color: $primary-color;
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
