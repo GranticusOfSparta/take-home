@@ -11,6 +11,9 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { HttpClientModule } from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule} from '@angular/material/input'
 
 @NgModule({
   declarations: [
@@ -26,6 +29,11 @@ import { AgGridModule } from 'ag-grid-angular';
     MatMenuModule,
     MatSidenavModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
     AgGridModule.withComponents([])
   ],
   providers: [],

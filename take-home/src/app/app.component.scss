@@ -19,17 +19,24 @@ $main-content-height: calc(100vh - #{$header-height} - #{$footer-height});
   height: $main-content-height;
 
   .main {
-    background: white;
-    width: 80em;
+    background: $white;
+    width: 80vw;
     display: flex;
+    flex-direction: column;
     margin: auto;
     height: 100%;
     opacity: 80%;
     overflow: auto;
-  }
-  .ag-grid-main {
-    height: 50em;
-    width: 100%;
+
+    .controls {
+      padding: 3rem 3rem;
+      background-color: darken($white, 15);
+    }
+    .grid-container,
+    .ag-grid-main {
+      height: 50em;
+      width: 100%;
+    }
   }
 }
 

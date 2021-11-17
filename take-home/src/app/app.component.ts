@@ -4,7 +4,8 @@ import { GameDeal } from './models/deals';
 import { GameSearchService } from './services/game-search.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { take, tap } from 'rxjs/operators'
+import { debounceTime, startWith, take, takeUntil, tap } from 'rxjs/operators'
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
   currentGameDeals: GameDeal[] = [];
   title = 'take-home';
+  form!: FormGroup;
   columnDefs: ColDef[] = [
     {
       headerName: "Title", field: "title", sortable: true, resizable: true, pinned: true, lockPosition: true, filter: 'agTextColumnFilter'
@@ -31,19 +33,28 @@ export class AppComponent implements OnInit, OnDestroy {
     { headerName: 'Steam Rating', field: 'steamRatingCount', sortable: true, resizable: true, filter: 'agNumberColumnFilter' },
   ];
 
+
   private readonly initialSearchPrice = 15;
 
-  constructor(private gameSearchService: GameSearchService) { }
+  constructor(private gameSearchService: GameSearchService, private fb: FormBuilder) { }
   ngOnInit() {
-
-    this.getGameDeals(this.initialSearchPrice);
+    this.form = this.fb.group({ searchPrice: this.fb.control(`${this.initialSearchPrice}`) })
+    this.watchSearchPrice();
   }
 
-  private getGameDeals(searchPrice: number) {
+  private watchSearchPrice() {
+    this.form.get("searchPrice")?.valueChanges.pipe(takeUntil(this.destroy$),
+      startWith(`${this.initialSearchPrice}`),
+      debounceTime(100),
+      tap((searchPrice: string) => this.getGameDeals(parseInt(searchPrice))))
+      .subscribe();
+  }
+
+  getGameDeals(searchPrice: number) {
     this.gameSearchService.getGameDeals(searchPrice).pipe(take(1), tap((gameDeals) => { this.currentGameDeals = gameDeals; })).subscribe();
   }
 
   ngOnDestroy() {
-
+    this.destroy$.next();
   }
 }

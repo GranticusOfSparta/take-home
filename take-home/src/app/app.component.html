@@ -3,7 +3,7 @@
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
-    <span id="app-title">Game It Up Bro</span>
+    <span id="app-title">Game It Up</span>
     <span class="spacer"></span>
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>favorite</mat-icon>
@@ -15,10 +15,21 @@
 </div>
 <div class="content">
 
-  <div class="main" role="main">
-    <ag-grid-angular #agGrid class="ag-theme-alpine ag-grid-main" [rowData]="currentGameDeals"
-      [columnDefs]="columnDefs">
-    </ag-grid-angular>
+  <div class="main" role="main" *ngIf="!!form">
+    <div class="controls">
+      <h2>Search Controls</h2>
+      <form [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Max Sale Price</mat-label>
+          <input id="search-by-price-input" matInput formControlName="searchPrice" type="number">
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="grid-container">
+      <ag-grid-angular #agGrid class="ag-theme-alpine ag-grid-main" [rowData]="currentGameDeals"
+        [columnDefs]="columnDefs">
+      </ag-grid-angular>
+    </div>
   </div>
 </div>
 <div class="footer"></div>
