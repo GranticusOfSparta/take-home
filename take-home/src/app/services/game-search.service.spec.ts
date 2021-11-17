@@ -19,7 +19,7 @@ describe('GameSearchService', () => {
   });
 
   it("should get a list of games with an upper price limit", (finish) => {
-    const upperPrice = "15";
+    const upperPrice = 15;
     const gameDeals = GameDealsFactory.createGameDeals();
     service.getGameDeals(upperPrice).subscribe(returnedDeals => {
       expect(returnedDeals.length).toBe(gameDeals.length);

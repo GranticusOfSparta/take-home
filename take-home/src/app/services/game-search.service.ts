@@ -13,7 +13,7 @@ export class GameSearchService {
 
   }
 
-  getGameDeals(upperPrice: string): Observable<GameDeal[]> {
+  getGameDeals(upperPrice: number): Observable<GameDeal[]> {
     return this.http.get<GameDeal[]>(`${this.baseURL}/deals?storeID=1&upperPrice=${upperPrice}`)
   }
 }
