@@ -4,7 +4,7 @@ import { GameDealsFactory } from './testing/factories/game-deals';
 import { GameSearchService } from './services/game-search.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MockModule } from 'ng-mocks';
@@ -55,6 +55,9 @@ describe('AppComponent', () => {
 
   it("should search for gamedeals on startup", () => {
     fixture.detectChanges();
+
     expect(component.currentGameDeals).toBe(getGameDealsReturn);
-  })
+    const agGrid = fixture.debugElement.query(By.css(".ag-grid-main")).componentInstance;
+    expect(agGrid.columnDefs).toEqual(component.columnDefs);
+    expect(agGrid.rowData).toEqual(getGameDealsReturn);  })
 });
