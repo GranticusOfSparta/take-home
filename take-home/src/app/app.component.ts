@@ -25,8 +25,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private gameSearchService: GameSearchService, private fb: FormBuilder) { }
   ngOnInit() {
-    this.form = this.fb.group({ maxSalePrice: this.fb.control(`${this.initialmaxSalePrice}`) })
+    this.initializeForm();
     this.watchmaxSalePrice();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
+  
+  private initializeForm() {
+    this.form = this.fb.group({ maxSalePrice: this.fb.control(`${this.initialmaxSalePrice}`) });
   }
 
   private watchmaxSalePrice() {
@@ -37,11 +45,9 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  getGameDeals(maxSalePrice: number) {
+  private getGameDeals(maxSalePrice: number) {
     this.gameSearchService.getGameDeals(maxSalePrice).pipe(take(1), tap((gameDeals) => { this.currentGameDeals = gameDeals; })).subscribe();
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-  }
+
 }
