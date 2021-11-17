@@ -1,4 +1,4 @@
-import { AgGridModule } from '@ag-grid-community/angular';
+import { AgGridModule } from 'ag-grid-angular';
 import { GameDeal } from './models/deals';
 import { GameDealsFactory } from './testing/factories/game-deals';
 import { GameSearchService } from './services/game-search.service';
