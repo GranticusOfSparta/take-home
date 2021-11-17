@@ -5,7 +5,7 @@ import { GameDeal } from './models/deals';
 import { GameSearchService } from './services/game-search.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, startWith, take, takeUntil, tap } from 'rxjs/operators'
+import { debounceTime, startWith, takeUntil, tap } from 'rxjs/operators'
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { getDeals } from './actions';
