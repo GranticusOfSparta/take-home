@@ -9,18 +9,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { MockModule } from 'ng-mocks';
+import { Mock, MockModule } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { getInitialState } from './reducers';
+import { getDeals } from './actions';
 
 describe('AppComponent', () => {
   let gameSearchService: jasmine.SpyObj<GameSearchService>;
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
   let getGameDealsReturn: GameDeal[];
-
+  let mockStore: MockStore;
+  let dispatchSpy: jasmine.Spy;
   beforeEach(async () => {
     getGameDealsReturn = GameDealsFactory.createGameDeals();
     gameSearchService = jasmine.createSpyObj("GameSearchService", { getGameDeals: of(getGameDealsReturn) })
@@ -34,15 +38,19 @@ describe('AppComponent', () => {
         ReactiveFormsModule,
         FormsModule,
         MatInputModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+
       ],
-      providers: [{ provide: GameSearchService, useValue: gameSearchService }],
+      providers: [{ provide: GameSearchService, useValue: gameSearchService }
+        , provideMockStore({ initialState: getInitialState() })],
       declarations: [
         AppComponent
       ],
     }).compileComponents()
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    mockStore = TestBed.inject(MockStore)
+    dispatchSpy = spyOn(mockStore, "dispatch").and.callThrough();
   })
 
 
@@ -76,11 +84,13 @@ describe('AppComponent', () => {
     detectNewChanges(fixture);
 
     component.form.get("maxSalePrice")?.setValue(`${newMaxPrice}`);
-    
+
     detectNewChanges(fixture);
-    
+
     expect(gameSearchService.getGameDeals).toHaveBeenCalledWith(newMaxPrice)
+    expect(dispatchSpy).toHaveBeenCalledWith(getDeals({ maxSalePrice: 30 }));
   }))
+
 });
 
 function detectNewChanges(fixture: ComponentFixture<AppComponent>) {

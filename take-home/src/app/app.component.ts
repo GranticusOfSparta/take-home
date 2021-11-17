@@ -7,6 +7,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, startWith, take, takeUntil, tap } from 'rxjs/operators'
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { getDeals } from './actions';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private readonly initialmaxSalePrice = 15;
 
-  constructor(private gameSearchService: GameSearchService, private fb: FormBuilder) { }
+  constructor(private gameSearchService: GameSearchService, private fb: FormBuilder, private store: Store) { }
   ngOnInit() {
     this.initializeForm();
     this.watchmaxSalePrice();
@@ -32,7 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
   }
-  
+
   private initializeForm() {
     this.form = this.fb.group({ maxSalePrice: this.fb.control(`${this.initialmaxSalePrice}`) });
   }
@@ -47,6 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private getGameDeals(maxSalePrice: number) {
+    this.store.dispatch(getDeals({ maxSalePrice }))
     this.gameSearchService.getGameDeals(maxSalePrice).pipe(take(1), tap((gameDeals) => { this.currentGameDeals = gameDeals; })).subscribe();
   }
 

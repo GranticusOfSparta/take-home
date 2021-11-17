@@ -13,7 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule} from '@angular/material/input'
+import { MatInputModule} from '@angular/material/input';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers'
 
 @NgModule({
   declarations: [
@@ -34,7 +36,10 @@ import { MatInputModule} from '@angular/material/input'
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
