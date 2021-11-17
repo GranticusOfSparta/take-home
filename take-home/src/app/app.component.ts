@@ -1,3 +1,4 @@
+import { MAIN_GRID_COL_DEFS } from './col-defs';
 import { ColDef } from 'ag-grid-community';
 import { GameDealsFactory } from './testing/factories/game-deals';
 import { GameDeal } from './models/deals';
@@ -17,21 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
   currentGameDeals: GameDeal[] = [];
   title = 'take-home';
   form!: FormGroup;
-  columnDefs: ColDef[] = [
-    {
-      headerName: "Title", field: "title", sortable: true, resizable: true, pinned: true, lockPosition: true, filter: 'agTextColumnFilter'
-    },
-    {
-      headerName: 'On Sale', field: 'isOnSale', sortable: true, resizable: true, valueFormatter: (params) => { return params.value === "1" ? "On Sale" : "Not On Sale" },
-    },
-    {
-      headerName: 'Deal Rating', field: 'dealRating', sortable: true, resizable: true, filter: 'agNumberColumnFilter'
-    },
-    { headerName: 'Sale Price', field: 'salePrice', sortable: true, resizable: true, filter: 'agNumberColumnFilter' },
-    { headerName: 'Normal Price', field: 'normalPrice', sortable: true, resizable: true, filter: 'agNumberColumnFilter' },
-    { headerName: 'Meta Critic Score', field: 'metacriticScore', sortable: true, resizable: true, filter: 'agNumberColumnFilter' },
-    { headerName: 'Steam Rating', field: 'steamRatingCount', sortable: true, resizable: true, filter: 'agNumberColumnFilter' },
-  ];
+  columnDefs: ColDef[] = MAIN_GRID_COL_DEFS;
 
 
   private readonly initialmaxSalePrice = 15;
