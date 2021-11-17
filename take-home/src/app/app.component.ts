@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private getGameDeals(maxSalePrice: number) {
     this.store.dispatch(getDeals({ maxSalePrice }))
-    this.gameSearchService.getGameDeals(maxSalePrice).pipe(take(1), tap((gameDeals) => { this.currentGameDeals = gameDeals; })).subscribe();
+    this.gameSearchService.getGameDeals(maxSalePrice).pipe(tap((gameDeals) => { this.currentGameDeals = gameDeals; })).subscribe();
   }
 
 
