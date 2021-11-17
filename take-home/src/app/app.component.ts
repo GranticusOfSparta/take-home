@@ -34,24 +34,24 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
 
 
-  private readonly initialSearchPrice = 15;
+  private readonly initialmaxSalePrice = 15;
 
   constructor(private gameSearchService: GameSearchService, private fb: FormBuilder) { }
   ngOnInit() {
-    this.form = this.fb.group({ searchPrice: this.fb.control(`${this.initialSearchPrice}`) })
-    this.watchSearchPrice();
+    this.form = this.fb.group({ maxSalePrice: this.fb.control(`${this.initialmaxSalePrice}`) })
+    this.watchmaxSalePrice();
   }
 
-  private watchSearchPrice() {
-    this.form.get("searchPrice")?.valueChanges.pipe(takeUntil(this.destroy$),
-      startWith(`${this.initialSearchPrice}`),
+  private watchmaxSalePrice() {
+    this.form.get("maxSalePrice")?.valueChanges.pipe(takeUntil(this.destroy$),
+      startWith(`${this.initialmaxSalePrice}`),
       debounceTime(100),
-      tap((searchPrice: string) => this.getGameDeals(parseInt(searchPrice))))
+      tap((maxSalePrice: string) => this.getGameDeals(parseInt(maxSalePrice))))
       .subscribe();
   }
 
-  getGameDeals(searchPrice: number) {
-    this.gameSearchService.getGameDeals(searchPrice).pipe(take(1), tap((gameDeals) => { this.currentGameDeals = gameDeals; })).subscribe();
+  getGameDeals(maxSalePrice: number) {
+    this.gameSearchService.getGameDeals(maxSalePrice).pipe(take(1), tap((gameDeals) => { this.currentGameDeals = gameDeals; })).subscribe();
   }
 
   ngOnDestroy() {
